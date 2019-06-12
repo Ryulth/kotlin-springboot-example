@@ -12,8 +12,23 @@ class ArticleService(
     fun getArticles(): MutableList<ArticleDto> = articleRepository.findAll()
     fun newArticle(articleData: ArticleData): Unit {
         val articleDto =
-            ArticleDto(title = articleData.title, content = articleData.content, authorId = articleData.authorId)
+            ArticleDto(
+                title = articleData.title,
+                content = articleData.content,
+                authorId = articleData.authorId
+            )
         articleRepository.save(articleDto)
+    }
+    fun editArticle(articleId: Long, articleData: ArticleData): Unit {
+        val articleDto = articleRepository.findById(articleId)
+            .orElseThrow { IllegalArgumentException("Id not exist")}
+        articleDto.title = articleData.title
+        articleDto.content = articleData.content
+        articleDto.authorId = articleData.authorId
+        articleRepository.save(articleDto)
+    }
+    fun deleteArticle(articleId: Long) : Unit{
+        articleRepository.deleteById(articleId)
     }
 
 }
