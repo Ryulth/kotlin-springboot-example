@@ -1,6 +1,6 @@
 package com.ryulth.kotlineexample.blog.service
 
-import com.ryulth.kotlineexample.blog.dto.ArticleDto
+import com.ryulth.kotlineexample.blog.entity.ArticleEntity
 import com.ryulth.kotlineexample.blog.pojo.model.ArticleData
 import com.ryulth.kotlineexample.blog.repository.ArticleRepository
 import org.springframework.stereotype.Service
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service
 class ArticleService(
     private val articleRepository: ArticleRepository
 ) {
-    fun getArticles(): MutableList<ArticleDto> = articleRepository.findAll()
+    fun getArticles(): MutableList<ArticleEntity> = articleRepository.findAll()
     fun newArticle(articleData: ArticleData): Unit {
         val articleDto =
-            ArticleDto(
+            ArticleEntity(
                 title = articleData.title,
                 content = articleData.content,
                 authorId = articleData.authorId
